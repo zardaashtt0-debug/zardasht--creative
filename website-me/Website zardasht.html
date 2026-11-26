@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zardasht Hemn | Graphic Designer & Web Developer</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Modern Typography: Vazirmatn (Kurdish/Arabic) & Plus Jakarta Sans (English) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= ROOT VARIABLES ================= */
+        :root {
+            --bg-body: #070b14;
+            --bg-card: rgba(18, 26, 44, 0.65);
+            --bg-card-hover: rgba(28, 40, 68, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.4);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #6366f1;
+            --accent: #f43f5e;
+            --success: #10b981;
+            
+            --nav-bg: rgba(7, 11, 20, 0.8);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Light Mode Palette */
+        body.light-mode {
+            --bg-body: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.88);
+            --bg-card-hover: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --border-hover: rgba(14, 165, 233, 0.45);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(248, 250, 252, 0.85);
+            --primary-glow: rgba(56, 189, 248, 0.18);
+        }
+
+        /* ================= RESET & BASE ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            position: relative;
+        }
+
+        html[lang="en"] body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Ambient Glow Spheres in Background */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.35;
+            transition: opacity 0.4s ease;
+        }
+        .glow-1 {
+            width: 480px;
+            height: 480px;
+            background: linear-gradient(135deg, #0284c7, #6366f1);
+            top: -160px;
+            left: -120px;
+        }
+        .glow-2 {
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(135deg, #f43f5e, #8b5cf6);
+            bottom: -100px;
+            right: -80px;
+        }
+
+        /* ================= NAVIGATION ================= */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1240px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 12px var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 6px 4px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .control-btn {
+            background: var(--border-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .control-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .lang-btn {
+            font-weight: 700;
+            font-size: 0.85rem;
+            width: auto;
+            padding: 0 14px;
+            border-radius: 20px;
+        }
+
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Mobile Drawer */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-body);
+            border-left: 1px solid var(--border-color);
+            z-index: 1001;
+            padding: 90px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.4);
+            transition: 0.4s ease;
+        }
+
+        html[lang="en"] .mobile-menu {
+            right: auto;
+            left: -100%;
+            border-left: none;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+        html[lang="en"] .mobile-menu.open {
+            left: 0;
+        }
+
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 600;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-close-btn {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        html[lang="en"] .mobile-close-btn {
+            left: auto;
+            right: 25px;
+        }
+
+        /* ================= HERO SECTION ================= */
+        header.hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 950px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Status Pill */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 30px;
+            color: var(--success);
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 4.4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #f43f5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Creative Pill Tags */
+        .creative-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+
+        .creative-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .creative-pill:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .hero-typing-box {
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .typing {
+            font-size: clamp(1.2rem, 3vw, 1.65rem);
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.3em;
+            background: var(--primary);
+            margin: 0 4px;
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .hero-desc {
+            color: var(--text-secondary);
+            font-size: 1.12rem;
+            max-width: 720px;
+            margin-bottom: 35px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 45px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7, #6366f1);
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.6);
+        }
+
+        .phone-num {
+            direction: ltr !important;
+            unicode-bidi: isolate;
+            display: inline-block;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55);
+        }
+
+        .btn-glass {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-glass:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            background: var(--bg-card-hover);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 820px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ================= SECTIONS COMMON ================= */
+        .section {
+            padding: 95px 20px;
+            max-width: 1240px;
+            margin: auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-tag {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 10px auto 0;
+        }
+
+        /* ================= ABOUT SECTION ================= */
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .diploma-highlight {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+
+        .diploma-highlight i {
+            font-size: 2rem;
+            color: #818cf8;
+        }
+
+        .diploma-highlight h4 {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .diploma-highlight span {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            border-color: var(--primary);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .feature-box i {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        /* ================= SERVICES / SKILLS SECTION ================= */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            background: var(--bg-card-hover);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon-wrap {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: rgba(56, 189, 248, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon-wrap {
+            transform: scale(1.1) rotate(6deg);
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .service-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.96rem;
+            margin-bottom: 22px;
+            line-height: 1.6;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-glow);
+        }
+
+        /* ================= PROJECTS SECTION ================= */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .project-folder {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .project-links a {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            margin-left: 12px;
+            transition: var(--transition);
+        }
+
+        html[lang="en"] .project-links a {
+            margin-left: 0;
+            margin-right: 12px;
+        }
+
+        .project-links a:hover {
+            color: var(--primary);
+            transform: scale(1.15);
+        }
+
+        .project-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* ================= CONTACT & SOCIAL SECTION ================= */
+        .contact-box {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(99, 102, 241, 0.12));
+            border: 1px solid var(--border-hover);
+            border-radius: var(--radius-lg);
+            padding: 60px 30px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            margin-top: 20px;
+        }
+
+        .contact-box h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .contact-box p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: auto auto 30px;
+            font-size: 1.05rem;
+        }
+
+        .contact-channels {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .channel-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-size: 0.98rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .channel-pill i {
+            font-size: 1.15rem;
+        }
+
+        .channel-pill.email-chan:hover {
+            border-color: #ea4335;
+            color: #ea4335;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(234, 67, 53, 0.25);
+        }
+
+        .channel-pill.whatsapp-chan:hover {
+            border-color: #25D366;
+            color: #25D366;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+        }
+
+        .channel-pill.linkme-chan:hover {
+            border-color: #38bdf8;
+            color: #38bdf8;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--primary-glow);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            color: #ffffff;
+            transform: translateY(-6px) scale(1.1);
+        }
+
+        .social-btn.facebook:hover { background: #1877f2; border-color: #1877f2; box-shadow: 0 8px 20px rgba(24, 119, 242, 0.4); }
+        .social-btn.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: #e4405f; box-shadow: 0 8px 20px rgba(228, 64, 95, 0.4); }
+        .social-btn.whatsapp:hover { background: #25D366; border-color: #25D366; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); }
+        .social-btn.linkme:hover { background: #00bcd4; border-color: #00bcd4; box-shadow: 0 8px 20px rgba(0, 188, 212, 0.4); }
+        .social-btn.email:hover { background: #ea4335; border-color: #ea4335; box-shadow: 0 8px 20px rgba(234, 67, 53, 0.4); }
+
+        /* ================= FOOTER ================= */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        footer p {
+            margin: 6px 0;
+        }
+
+        /* Scroll To Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        html[lang="en"] .scroll-top-btn {
+            left: auto;
+            right: 30px;
+        }
+
+        .scroll-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 900px) {
+            .about-card {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 12px 20px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: block;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 70px 20px;
+            }
+
+            .contact-channels {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .channel-pill {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Ambient Glowing Orbs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- Scroll To Top -->
+    <button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" onclick="toggleMobileMenu()"><i class="fas fa-home"></i> <span id="mNavHome">سەرەکی</span></a>
+        <a href="#about" onclick="toggleMobileMenu()"><i class="fas fa-user"></i> <span id="mNavAbout">دەربارەی من</span></a>
+        <a href="#services" onclick="toggleMobileMenu()"><i class="fas fa-palette"></i> <span id="mNavServices">خزمەتگوزارییەکان</span></a>
+        <a href="#projects" onclick="toggleMobileMenu()"><i class="fas fa-laptop-code"></i> <span id="mNavProjects">پرۆژەکان</span></a>
+        <a href="#contact" onclick="toggleMobileMenu()"><i class="fas fa-envelope"></i> <span id="mNavContact">پەیوەندی</span></a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#" class="logo">
+            <span class="logo-dot"></span>
+            <span>Zardasht Hemn</span>
+        </a>
+
+        <ul>
+            <li><a href="#home" class="active" id="navHome">سەرەکی</a></li>
+            <li><a href="#about" id="navAbout">دەربارەی من</a></li>
+            <li><a href="#services" id="navServices">خزمەتگوزارییەکان</a></li>
+            <li><a href="#projects" id="navProjects">پرۆژەکان</a></li>
+            <li><a href="#contact" id="navContact">پەیوەندی</a></li>
+        </ul>
+
+        <div class="nav-controls">
+            <!-- Language Toggle Button -->
+            <button class="control-btn lang-btn" onclick="toggleLang()" id="langBtn" title="گۆڕینی زمان">
+                EN
+            </button>
+
+            <!-- Theme Toggle Button -->
+            <button class="control-btn" onclick="toggleTheme()" id="themeBtn" title="دۆخی ڕووناک/تاریک">
+                <i class="fas fa-moon"></i>
+            </button>
+
+            <!-- Hamburger Button -->
+            <button class="hamburger-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero" id="home">
+        <div class="hero-container">
+            
+            <!-- Open to work badge -->
+            <div class="status-badge" id="statusBadge">
+                <span class="pulse-dot"></span>
+                <span>ئامادەم بۆ پڕۆژەی دیزاین و دروستکردنی وێبسایت</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1>
+                <span id="heroGreeting">سڵاو، من</span> <span class="gradient-text" id="heroName">زەردەشت هێمن</span> 
+            </h1>
+
+            <!-- Creative Pills -->
+            <div class="creative-pills">
+                <span class="creative-pill"><i class="fas fa-laptop-code"></i> Web Design & Development</span>
+                <span class="creative-pill"><i class="fas fa-share-nodes"></i> Social Media Design</span>
+                <span class="creative-pill"><i class="fas fa-fingerprint"></i> Brand Identity</span>
+                <span class="creative-pill"><i class="fas fa-pen-nib"></i> Logo Design</span>
+                <span class="creative-pill"><i class="fas fa-bullhorn"></i> Digital Marketing Graphics</span>
+                <span class="creative-pill"><i class="fas fa-lightbulb"></i> Creative Design Solutions</span>
+            </div>
+
+            <!-- Animated Typing Effect -->
+            <div class="hero-typing-box">
+                <span class="typing" id="typing"></span>
+                <span class="cursor"></span>
+            </div>
+
+            <!-- Short Bio Description -->
+            <p class="hero-desc" id="heroDesc">
+                گرافیک دیزاینەر، دروستکەری وێبسایت و خاوەن بڕوانامەی دبلۆم لە پڕۆگرامینگی کۆمپیوتەر؛ تایبەتمەند لە دروستکردنی شوناسی براند، گرافیکی سۆشیاڵ میدیا و وێبسایتی مۆدێرن و پڕۆفشناڵ.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="https://wa.me/9647706079523" target="_blank" class="btn btn-whatsapp" id="btnWhatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>واتسئەپ <span class="phone-num">0770 607 9523</span></span>
+                </a>
+                <a href="#services" class="btn btn-primary" id="btnServices">
+                    <i class="fas fa-layer-group"></i>
+                    <span>خزمەتگوزارییەکان</span>
+                </a>
+                <a href="https://link.me/zardasht.creative" target="_blank" class="btn btn-glass" id="btnLinkme">
+                    <i class="fas fa-link"></i>
+                    <span>Link.me</span>
+                </a>
+            </div>
+
+            <!-- Key Stats -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">+٣</div>
+                    <div class="stat-label" id="statExp">ساڵ ئەزموونی پرۆفێشناڵ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+٣٠</div>
+                    <div class="stat-label" id="statProjects">پڕۆژەی دیزاین و کۆد</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">دبلۆم</div>
+                    <div class="stat-label" id="statDiploma">کۆمپیوتەر - پڕۆگرامینگ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">١٠٠٪</div>
+                    <div class="stat-label" id="statSatisfaction">ڕەزامەندی کڕیاران</div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <span class="section-tag" id="aboutTag">ناساندن</span>
+            <h2 class="section-title" id="aboutTitle">دەربارەی من</h2>
+            <p class="section-subtitle" id="aboutSubtitle">تێکەڵکردنی هونەری دیزاین لەگەڵ هێزی پڕۆگرامینگی کۆمپیوتەر</p>
+        </div>
+
+        <div class="about-card">
+            <div class="about-text">
+                <div class="diploma-highlight">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <h4 id="dipTitle">دبلۆم لە کۆمپیوتەر - بەشی پڕۆگرامینگ</h4>
+                        <span id="dipSub">خاوەن پێشینەی ئەکادیمی بەهێز لە ئەندازیاری سۆفتوێر و کۆدینگی ستاندارد</span>
+                    </div>
+                </div>
+
+                <p id="aboutP1">
+                    من <strong>زەردەشت هێمن</strong>، گرافیک دیزاینەر و دروستکەری وێبسایت. خولیای من بریتییە لە خولقاندنی کاریگەری دیداری ناوازە، دروستکردنی شوناسی براندی بەهێز، و بنیاتنانی وێبسایتی مۆدێرن، خێرا و کارلێککار.
+                </p>
+                <p id="aboutP2">
+                    توانستی پڕۆگرامینگ لەگەڵ داهێنەری گرافیک دیزاینم تێکەڵ کردووە تاوەکو بەرهەمێک پێشکەش بکەم هەم لە ڕووی بینینەوە سەرنجڕاکێش و سەردەمیانە بێت، هەم لە ڕووی تەکنیکییەوە بێ کەمکوڕی و ستاندارد بێت.
+                </p>
+            </div>
+
+            <div class="about-features">
+                <div class="feature-box">
+                    <i class="fas fa-pen-nib"></i>
+                    <span id="feat1">دیزاینی لۆگۆ و شوناسی براند</span>
+                </div>
+                <div class="feature-box">
+                    <i class="fas fa-globe"></i>
+                    <span id="feat2">دروستکردنی وێبسایتی سەردەمیانە</span>
+                </div>
+                <div class="feature-box">
+                    <i class="fas fa-bullhorn"></i>
+                    <span id="feat3">گرافیکی بەبازاڕکردنی دیجیتال</span>
+                </div>
+                <div class="feature-box">
+                    <i class="fas fa-laptop-code"></i>
+                    <span id="feat4">پڕۆگرامینگی کۆدی خاوێن</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section" id="services">
+        <div class="section-header">
+            <span class="section-tag" id="servicesTag">بوار و تواناکانم</span>
+            <h2 class="section-title" id="servicesTitle">خزمەتگوزارییەکان</h2>
+            <p class="section-subtitle" id="servicesSubtitle">هەموو ئەو خزمەتگوزارییە پرۆفێشناڵانەی بە بەرزترین ئاست پێشکەشی دەکەم</p>
+        </div>
+
+        <div class="services-grid">
+            
+            <!-- Service 1: Web Design & Development -->
+            <div class="service-card">
+                <div>
+                    <div class="service-icon-wrap">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 id="s1Title">Web Design & Development</h3>
+                    <p id="s1Desc">دروستکردن و دیزاینکردنی وێبسایتی خێرا، ڕێکخراو و Responsive بۆ هەموو ئامێرەکان بە نوێترین ستانداردەکانی وێب.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">HTML5 / CSS3</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Responsive</span>
+                    <span class="tag">GitHub Hosting</span>
+                </div>
+            </div>
+
+            <!-- Service 2: Social Media Design -->
+            <div class="service-card">
+                <div>
+                    <div class="service-icon-wrap">
+                        <i class="fas fa-photo-film"></i>
+                    </div>
+                    <h3 id="s2Title">Social Media Design</h3>
+                    <p id="s2Desc">دیزاینکردنی پۆست، ستۆری، و کەڤەری سەرنجڕاکێش بۆ ئینستاگرام، فەیسبووک و تۆڕە کۆمەڵایەتییەکان بە بەرزترین کوالێتی.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Instagram Ads</span>
+                    <span class="tag">Post & Story</span>
+                    <span class="tag">Banners</span>
+                    <span class="tag">Engaging UI</span>
+                </div>
+            </div>
+
+            <!-- Service 3: Brand Identity & Logo Design -->
+            <div class="service-card">
+                <div>
+                    <div class="service-icon-wrap">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <h3 id="s3Title">Brand Identity & Logo Design</h3>
+                    <p id="s3Desc">دروستکردنی لۆگۆی تایبەت و دیزاینکردنی شوناسی بینراوی تەواو (فۆنت، ڕەنگەکان، بزنس کارت و کتێبی ڕێنمایی براند).</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Unique Logos</span>
+                    <span class="tag">Color Palette</span>
+                    <span class="tag">Typography</span>
+                    <span class="tag">Style Guide</span>
+                </div>
+            </div>
+
+            <!-- Service 4: Visual Communication -->
+            <div class="service-card">
+                <div>
+                    <div class="service-icon-wrap">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 id="s4Title">Visual Communication</h3>
+                    <p id="s4Desc">گەیاندنی پەیام و بیرۆکە ئاڵۆزەکان بە شێوازێکی سادە، کاریگەر و داهێنەرانە لە ڕێگەی هونەری دیزاینی بینراوەوە.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Concept Art</span>
+                    <span class="tag">Infographics</span>
+                    <span class="tag">Visual Layout</span>
+                    <span class="tag">Storytelling</span>
+                </div>
+            </div>
+
+            <!-- Service 5: Digital Marketing Graphics -->
+            <div class="service-card">
+                <div>
+                    <div class="service-icon-wrap">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 id="s5Title">Digital Marketing Graphics</h3>
+                    <p id="s5Desc">گرافیک و بانەری تایبەت بە کەمپەینی ڕیکلامی و فرۆش بۆ بەرزکردنەوەی ژمارەی کڕیار و بەدەستهێنانی باشترین ئەنجام.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Ad Creatives</span>
+                    <span class="tag">Promotions</span>
+                    <span class="tag">Marketing Banners</span>
+                    <span class="tag">High Conversion</span>
+                </div>
+            </div>
+
+            <!-- Service 6: Creative Design Solutions & Programming -->
+            <div class="service-card">
+                <div>
+                    <div class="service-icon-wrap">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 id="s6Title">Creative Design Solutions</h3>
+                    <p id="s6Desc">چارەسەری داهێنەرانە بۆ پڕۆژە تایبەتەکان، شیکارکردنی کێشەکان و پێشکەشکردنی بەرهەمی تایبەت بە پشتبەستن بە کۆد و داتابەیس.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Diploma Programming</span>
+                    <span class="tag">C# / Java</span>
+                    <span class="tag">SQL Databases</span>
+                    <span class="tag">Problem Solving</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" id="projects">
+        <div class="section-header">
+            <span class="section-tag" id="projTag">بەرهەمەکان</span>
+            <h2 class="section-title" id="projTitle">نموونەی پرۆژەکان</h2>
+            <p class="section-subtitle" id="projSubtitle">بەشێک لە نموونەی کارەکانم لە دیزاین و گەشەپێدان</p>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div>
+                    <div class="project-top">
+                        <i class="fas fa-globe project-folder"></i>
+                        <span class="project-badge">Web & UI</span>
+                    </div>
+                    <h4 id="p1Title">ماڵپەڕی کەسی پڕۆفشناڵ (Portfolio)</h4>
+                    <p id="p1Desc">وێبسایتێکی تەواو سەردەمیانە، دوو زمانی (کوردی و ئینگلیزی)، سیستەمی دۆخی تاریک/ڕووناک، بە تەواوی ئامادەکراو بۆ GitHub Pages.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">HTML5 / CSS3</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Bilingual (KU/EN)</span>
+                    <span class="tag">GitHub Ready</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div>
+                    <div class="project-top">
+                        <i class="fas fa-compass-drafting project-folder"></i>
+                        <span class="project-badge">Branding</span>
+                    </div>
+                    <h4 id="p2Title">شوناسی براند و دیزاینی لۆگۆ</h4>
+                    <p id="p2Desc">پڕۆژەی داڕشتنی براند لە سەرەتاوە تا کۆتایی: هەڵبژاردنی ڕەنگ، فۆنت، دروستکردنی لۆگۆی ڤێکتۆری و نموونەی بەکارهێنان.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Logo Design</span>
+                    <span class="tag">Brand Identity</span>
+                    <span class="tag">Vector Art</span>
+                    <span class="tag">Mockups</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div>
+                    <div class="project-top">
+                        <i class="fas fa-cubes project-folder"></i>
+                        <span class="project-badge">Software</span>
+                    </div>
+                    <h4 id="p3Title">سیستەم و ئەپڵیکەیشنی کۆمپیوتەر</h4>
+                    <p id="p3Desc">پڕۆژەی پڕۆگرامینگ بە بەکارهێنانی C# و Java لەگەڵ بنکەدراوەی SQL بۆ بەڕێوەبردنی داتا بە متمانە و کوالێتی بەرز.</p>
+                </div>
+                <div class="skill-tags">
+                    <span class="tag">Programming Diploma</span>
+                    <span class="tag">C# .NET</span>
+                    <span class="tag">SQL Database</span>
+                    <span class="tag">Software Logic</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact">
+        <div class="contact-box">
+            <h3 id="contactHeading">پێکەوە پڕۆژەیەکی داهێنەرانە دروست بکەین؟</h3>
+            <p id="contactSub">
+                پێویستت بە لۆگۆ، شوناسی براند، وێبسایت یان گرافیکی سۆشیاڵ میدیایە؟ دەتوانیت لە ڕێگەی ئەم کەناڵانەوە ڕاستەوخۆ پەیوەندیم پێوە بکەیت:
+            </p>
+
+            <!-- Direct Contact Channels -->
+            <div class="contact-channels">
+                <a href="mailto:zardaashtt0@gmail.com" class="channel-pill email-chan">
+                    <i class="fas fa-envelope"></i>
+                    <span>zardaashtt0@gmail.com</span>
+                </a>
+
+                <a href="https://wa.me/9647706079523" target="_blank" class="channel-pill whatsapp-chan">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="phone-num">0770 607 9523</span>
+                </a>
+
+                <a href="https://link.me/zardasht.creative" target="_blank" class="channel-pill linkme-chan">
+                    <i class="fas fa-link"></i>
+                    <span>link.me/zardasht.creative</span>
+                </a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links" id="social">
+                <a href="https://www.facebook.com/zardasht.hemn" target="_blank" class="social-btn facebook" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/zardasht_hemn/?hl=en" target="_blank" class="social-btn instagram" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/9647706079523" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://link.me/zardasht.creative" target="_blank" class="social-btn linkme" title="Link.me">
+                    <i class="fas fa-link"></i>
+                </a>
+                <a href="mailto:zardaashtt0@gmail.com" class="social-btn email" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p id="footerCopy">© 2026 زەردەشت هێمن (Zardasht Hemn) - هەموو مافەکان پارێزراون</p>
+        <p id="footerMade">دیزاین و دروستکراوە بە کۆدی خاوێن بۆ بڵاوکردنەوە لە GitHub 🚀</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ================= THEME TOGGLE (DARK / LIGHT) ================= */
+        const themeBtn = document.getElementById("themeBtn");
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme === "light") {
+                document.body.classList.add("light-mode");
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.classList.remove("light-mode");
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("light-mode");
+            const isLight = document.body.classList.contains("light-mode");
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+            themeBtn.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        /* ================= MOBILE MENU TOGGLE ================= */
+        const mobileMenu = document.getElementById("mobileMenu");
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle("open");
+        }
+
+        /* ================= SCROLL TO TOP & ACTIVE NAV ================= */
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add("visible");
+            } else {
+                scrollTopBtn.classList.remove("visible");
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ================= MULTI-PHRASE TYPING EFFECT ================= */
+        const phrasesKu = [
+            "گرافیک دیزاینەری داهێنەر 🎨",
+            "دروستکەری وێبسایت و وێب دیزاین 💻",
+            "دیزاینەری لۆگۆ و شوناسی براند 🏷️",
+            "گرافیکی سۆشیاڵ میدیا و مارکێتینگ 📱",
+            "دبلۆم لە کۆمپیوتەر - بەشی پڕۆگرامینگ ⚡"
+        ];
+
+        const phrasesEn = [
+            "Graphic Designer & Visual Artist 🎨",
+            "Web Design & Development 💻",
+            "Brand Identity & Logo Design 🏷️",
+            "Social Media & Digital Marketing Graphics 📱",
+            "Computer Science Diploma - Programming ⚡"
+        ];
+
+        let isKurdish = true;
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingTimeout = null;
+
+        function runTyping() {
+            const currentList = isKurdish ? phrasesKu : phrasesEn;
+            const currentPhrase = currentList[phraseIndex];
+            const typingElem = document.getElementById("typing");
+
+            if (isDeleting) {
+                typingElem.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElem.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 35 : 85;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 1900; // Pause at end of phrase
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % currentList.length;
+                typeSpeed = 350; // Pause before typing new phrase
+            }
+
+            typingTimeout = setTimeout(runTyping, typeSpeed);
+        }
+
+        function restartTyping() {
+            clearTimeout(typingTimeout);
+            charIndex = 0;
+            isDeleting = false;
+            document.getElementById("typing").textContent = "";
+            runTyping();
+        }
+
+        /* ================= BILINGUAL DICTIONARY (KU / EN) ================= */
+        const translations = {
+            ku: {
+                langBtnText: "EN",
+                navHome: "سەرەکی",
+                navAbout: "دەربارەی من",
+                navServices: "خزمەتگوزارییەکان",
+                navProjects: "پرۆژەکان",
+                navContact: "پەیوەندی",
+                statusBadge: '<span class="pulse-dot"></span><span>ئامادەم بۆ پڕۆژەی دیزاین و دروستکردنی وێبسایت</span>',
+                heroGreeting: "سڵاو، من",
+                heroName: "زەردەشت هێمن",
+                heroDesc: "گرافیک دیزاینەر، دروستکەری وێبسایت و خاوەن بڕوانامەی دبلۆم لە پڕۆگرامینگی کۆمپیوتەر؛ تایبەتمەند لە دروستکردنی شوناسی براند، گرافیکی سۆشیاڵ میدیا و وێبسایتی مۆدێرن و پڕۆفشناڵ.",
+                btnWhatsapp: '<i class="fab fa-whatsapp"></i><span>واتسئەپ <span class="phone-num">0770 607 9523</span></span>',
+                btnServices: '<i class="fas fa-layer-group"></i><span>خزمەتگوزارییەکان</span>',
+                statExp: "ساڵ ئەزموونی پرۆفێشناڵ",
+                statProjects: "پڕۆژەی دیزاین و کۆد",
+                statDiploma: "کۆمپیوتەر - پڕۆگرامینگ",
+                statSatisfaction: "ڕەزامەندی کڕیاران",
+                aboutTag: "ناساندن",
+                aboutTitle: "دەربارەی من",
+                aboutSubtitle: "تێکەڵکردنی هونەری دیزاین لەگەڵ هێزی پڕۆگرامینگی کۆمپیوتەر",
+                dipTitle: "دبلۆم لە کۆمپیوتەر - بەشی پڕۆگرامینگ",
+                dipSub: "خاوەن پێشینەی ئەکادیمی بەهێز لە ئەندازیاری سۆفتوێر و کۆدینگی ستاندارد",
+                aboutP1: "من زەردەشت هێمن، گرافیک دیزاینەر و دروستکەری وێبسایت. خولیای من بریتییە لە خولقاندنی کاریگەری دیداری ناوازە، دروستکردنی شوناسی براندی بەهێز، و بنیاتنانی وێبسایتی مۆدێرن، خێرا و کارلێککار.",
+                aboutP2: "توانستی پڕۆگرامینگ لەگەڵ داهێنەری گرافیک دیزاینم تێکەڵ کردووە تاوەکو بەرهەمێک پێشکەش بکەم هەم لە ڕووی بینینەوە سەرنجڕاکێش و سەردەمیانە بێت، هەم لە ڕووی تەکنیکییەوە بێ کەمکوڕی و ستاندارد بێت.",
+                feat1: "دیزاینی لۆگۆ و شوناسی براند",
+                feat2: "دروستکردنی وێبسایتی سەردەمیانە",
+                feat3: "گرافیکی بەبازاڕکردنی دیجیتال",
+                feat4: "پڕۆگرامینگی کۆدی خاوێن",
+                servicesTag: "بوار و تواناکانم",
+                servicesTitle: "خزمەتگوزارییەکان",
+                servicesSubtitle: "هەموو ئەو خزمەتگوزارییە پرۆفێشناڵانەی بە بەرزترین ئاست پێشکەشی دەکەم",
+                s1Title: "Web Design & Development",
+                s1Desc: "دروستکردن و دیزاینکردنی وێبسایتی خێرا، ڕێکخراو و Responsive بۆ هەموو ئامێرەکان بە نوێترین ستانداردەکانی وێب.",
+                s2Title: "Social Media Design",
+                s2Desc: "دیزاینکردنی پۆست، ستۆری، و کەڤەری سەرنجڕاکێش بۆ ئینستاگرام، فەیسبووک و تۆڕە کۆمەڵایەتییەکان بە بەرزترین کوالێتی.",
+                s3Title: "Brand Identity & Logo Design",
+                s3Desc: "دروستکردنی لۆگۆی تایبەت و دیزاینکردنی شوناسی بینراوی تەواو (فۆنت، ڕەنگەکان، بزنس کارت و کتێبی ڕێنمایی براند).",
+                s4Title: "Visual Communication",
+                s4Desc: "گەیاندنی پەیام و بیرۆکە ئاڵۆزەکان بە شێوازێکی سادە، کاریگەر و داهێنەرانە لە ڕێگەی هونەری دیزاینی بینراوەوە.",
+                s5Title: "Digital Marketing Graphics",
+                s5Desc: "گرافیک و بانەری تایبەت بە کەمپەینی ڕیکلامی و فرۆش بۆ بەرزکردنەوەی ژمارەی کڕیار و بەدەستهێنانی باشترین ئەنجام.",
+                s6Title: "Creative Design Solutions",
+                s6Desc: "چارەسەری داهێنەرانە بۆ پڕۆژە تایبەتەکان، شیکارکردنی کێشەکان و پێشکەشکردنی بەرهەمی تایبەت بە پشتبەستن بە کۆد و داتابەیس.",
+                projTag: "بەرهەمەکان",
+                projTitle: "نموونەی پرۆژەکان",
+                projSubtitle: "بەشێک لە نموونەی کارەکانم لە دیزاین و گەشەپێدان",
+                p1Title: "ماڵپەڕی کەسی پڕۆفشناڵ (Portfolio)",
+                p1Desc: "وێبسایتێکی تەواو سەردەمیانە، دوو زمانی (کوردی و ئینگلیزی)، سیستەمی دۆخی تاریک/ڕووناک، بە تەواوی ئامادەکراو بۆ GitHub Pages.",
+                p2Title: "شوناسی براند و دیزاینی لۆگۆ",
+                p2Desc: "پڕۆژەی داڕشتنی براند لە سەرەتاوە تا کۆتایی: هەڵبژاردنی ڕەنگ، فۆنت، دروستکردنی لۆگۆی ڤێکتۆری و نموونەی بەکارهێنان.",
+                p3Title: "سیستەم و ئەپڵیکەیشنی کۆمپیوتەر",
+                p3Desc: "پڕۆژەی پڕۆگرامینگ بە بەکارهێنانی C# و Java لەگەڵ بنکەدراوەی SQL بۆ بەڕێوەبردنی داتا بە متمانە و کوالێتی بەرز.",
+                contactHeading: "پێکەوە پڕۆژەیەکی داهێنەرانە دروست بکەین؟",
+                contactSub: "پێویستت بە لۆگۆ، شوناسی براند، وێبسایت یان گرافیکی سۆشیاڵ میدیایە؟ دەتوانیت لە ڕێگەی ئەم کەناڵانەوە ڕاستەوخۆ پەیوەندیم پێوە بکەیت:",
+                footerCopy: "© 2026 زەردەشت هێمن (Zardasht Hemn) - هەموو مافەکان پارێزراون",
+                footerMade: "دیزاین و دروستکراوە بە کۆدی خاوێن بۆ بڵاوکردنەوە لە GitHub 🚀"
+            },
+            en: {
+                langBtnText: "KU",
+                navHome: "Home",
+                navAbout: "About Me",
+                navServices: "Services",
+                navProjects: "Projects",
+                navContact: "Contact",
+                statusBadge: '<span class="pulse-dot"></span><span>Available for Web & Graphic Design Projects</span>',
+                heroGreeting: "Hello, I'm",
+                heroName: "Zardasht Hemn",
+                heroDesc: "Graphic Designer, Web Developer, and Computer Programming Diploma Graduate. Specializing in Brand Identity, Social Media Graphics, and modern, high-performance websites.",
+                btnWhatsapp: '<i class="fab fa-whatsapp"></i><span>WhatsApp <span class="phone-num">0770 607 9523</span></span>',
+                btnServices: '<i class="fas fa-layer-group"></i><span>Explore Services</span>',
+                statExp: "Years Pro Experience",
+                statProjects: "Design & Code Projects",
+                statDiploma: "Computer - Programming",
+                statSatisfaction: "Client Satisfaction",
+                aboutTag: "Introduction",
+                aboutTitle: "About Me",
+                aboutSubtitle: "Blending visual design artistry with computer programming expertise",
+                dipTitle: "Diploma in Computer - Programming Department",
+                dipSub: "Strong foundation in software architecture, algorithms, and standard clean code",
+                aboutP1: "I am Zardasht Hemn, a passionate Graphic Designer & Web Developer. I love transforming brand concepts into stunning visuals and building lightning-fast, user-friendly modern web experiences.",
+                aboutP2: "Combining my programming background with creative graphic design allows me to craft digital products that not only look remarkable but also operate with technical perfection.",
+                feat1: "Logo & Brand Identity Design",
+                feat2: "Modern Website Development",
+                feat3: "Digital Marketing Graphics",
+                feat4: "Clean & Robust Code",
+                servicesTag: "Expertise",
+                servicesTitle: "Services & Capabilities",
+                servicesSubtitle: "Professional design and development solutions tailored to elevate your business",
+                s1Title: "Web Design & Development",
+                s1Desc: "Building modern, fast, responsive websites optimized for seamless performance across all mobile and desktop devices.",
+                s2Title: "Social Media Design",
+                s2Desc: "Crafting eye-catching posts, stories, banners, and campaign visuals that maximize audience engagement.",
+                s3Title: "Brand Identity & Logo Design",
+                s3Desc: "Designing distinctive vector logos, complete brand guidelines, typography hierarchies, and corporate stationery.",
+                s4Title: "Visual Communication",
+                s4Desc: "Translating complex ideas into intuitive, compelling visuals that communicate your core message effortlessly.",
+                s5Title: "Digital Marketing Graphics",
+                s5Desc: "High-conversion ad graphics, promotional banners, and campaign assets tailored for digital platforms.",
+                s6Title: "Creative Design Solutions",
+                s6Desc: "Custom creative problem-solving combining visual aesthetics with software engineering and database logic.",
+                projTag: "Portfolio",
+                projTitle: "Featured Projects",
+                projSubtitle: "A glimpse of recent creative design and development work",
+                p1Title: "Professional Personal Portfolio",
+                p1Desc: "A sleek, responsive bilingual website with dark/light mode toggle, structured and ready for GitHub Pages hosting.",
+                p2Title: "Brand Identity & Logo Suite",
+                p2Desc: "Complete brand design including logo mark, typography guidelines, vector assets, and real-world mockups.",
+                p3Title: "Desktop Software & Database App",
+                p3Desc: "Software development project utilizing C# and Java paired with SQL Server for seamless management.",
+                contactHeading: "Let's create something extraordinary!",
+                contactSub: "Need a distinctive brand identity, a custom website, or social media graphics? Feel free to reach out directly through any of these channels:",
+                footerCopy: "© 2026 Zardasht Hemn - All Rights Reserved",
+                footerMade: "Crafted with clean code & creative passion — GitHub Ready 🚀"
+            }
+        };
+
+        function toggleLang() {
+            isKurdish = !isKurdish;
+            localStorage.setItem("lang", isKurdish ? "ku" : "en");
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const lang = isKurdish ? "ku" : "en";
+            const data = translations[lang];
+
+            document.documentElement.lang = lang;
+            document.documentElement.dir = isKurdish ? "rtl" : "ltr";
+
+            document.getElementById("langBtn").textContent = data.langBtnText;
+
+            // Nav links
+            document.getElementById("navHome").textContent = data.navHome;
+            document.getElementById("navAbout").textContent = data.navAbout;
+            document.getElementById("navServices").textContent = data.navServices;
+            document.getElementById("navProjects").textContent = data.navProjects;
+            document.getElementById("navContact").textContent = data.navContact;
+
+            document.getElementById("mNavHome").textContent = data.navHome;
+            document.getElementById("mNavAbout").textContent = data.navAbout;
+            document.getElementById("mNavServices").textContent = data.navServices;
+            document.getElementById("mNavProjects").textContent = data.navProjects;
+            document.getElementById("mNavContact").textContent = data.navContact;
+
+            // Hero
+            document.getElementById("statusBadge").innerHTML = data.statusBadge;
+            document.getElementById("heroGreeting").textContent = data.heroGreeting;
+            document.getElementById("heroName").textContent = data.heroName;
+            document.getElementById("heroDesc").textContent = data.heroDesc;
+            document.getElementById("btnWhatsapp").innerHTML = data.btnWhatsapp;
+            document.getElementById("btnServices").innerHTML = data.btnServices;
+            document.getElementById("statExp").textContent = data.statExp;
+            document.getElementById("statProjects").textContent = data.statProjects;
+            document.getElementById("statDiploma").textContent = data.statDiploma;
+            document.getElementById("statSatisfaction").textContent = data.statSatisfaction;
+
+            // About
+            document.getElementById("aboutTag").textContent = data.aboutTag;
+            document.getElementById("aboutTitle").textContent = data.aboutTitle;
+            document.getElementById("aboutSubtitle").textContent = data.aboutSubtitle;
+            document.getElementById("dipTitle").textContent = data.dipTitle;
+            document.getElementById("dipSub").textContent = data.dipSub;
+            document.getElementById("aboutP1").textContent = data.aboutP1;
+            document.getElementById("aboutP2").textContent = data.aboutP2;
+            document.getElementById("feat1").textContent = data.feat1;
+            document.getElementById("feat2").textContent = data.feat2;
+            document.getElementById("feat3").textContent = data.feat3;
+            document.getElementById("feat4").textContent = data.feat4;
+
+            // Services
+            document.getElementById("servicesTag").textContent = data.servicesTag;
+            document.getElementById("servicesTitle").textContent = data.servicesTitle;
+            document.getElementById("servicesSubtitle").textContent = data.servicesSubtitle;
+            document.getElementById("s1Title").textContent = data.s1Title;
+            document.getElementById("s1Desc").textContent = data.s1Desc;
+            document.getElementById("s2Title").textContent = data.s2Title;
+            document.getElementById("s2Desc").textContent = data.s2Desc;
+            document.getElementById("s3Title").textContent = data.s3Title;
+            document.getElementById("s3Desc").textContent = data.s3Desc;
+            document.getElementById("s4Title").textContent = data.s4Title;
+            document.getElementById("s4Desc").textContent = data.s4Desc;
+            document.getElementById("s5Title").textContent = data.s5Title;
+            document.getElementById("s5Desc").textContent = data.s5Desc;
+            document.getElementById("s6Title").textContent = data.s6Title;
+            document.getElementById("s6Desc").textContent = data.s6Desc;
+
+            // Projects
+            document.getElementById("projTag").textContent = data.projTag;
+            document.getElementById("projTitle").textContent = data.projTitle;
+            document.getElementById("projSubtitle").textContent = data.projSubtitle;
+            document.getElementById("p1Title").textContent = data.p1Title;
+            document.getElementById("p1Desc").textContent = data.p1Desc;
+            document.getElementById("p2Title").textContent = data.p2Title;
+            document.getElementById("p2Desc").textContent = data.p2Desc;
+            document.getElementById("p3Title").textContent = data.p3Title;
+            document.getElementById("p3Desc").textContent = data.p3Desc;
+
+            // Contact & Footer
+            document.getElementById("contactHeading").textContent = data.contactHeading;
+            document.getElementById("contactSub").textContent = data.contactSub;
+            document.getElementById("footerCopy").textContent = data.footerCopy;
+            document.getElementById("footerMade").textContent = data.footerMade;
+
+            restartTyping();
+        }
+
+        /* Initial Setup */
+        window.addEventListener("DOMContentLoaded", () => {
+            initTheme();
+            const savedLang = localStorage.getItem("lang");
+            if (savedLang === "en") {
+                isKurdish = false;
+            }
+            applyLanguage();
+        });
+    </script>
+</body>
+</html>
